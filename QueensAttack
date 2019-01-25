@@ -1,0 +1,35 @@
+N = (1,0)
+S = (-1,0)
+W = (0,-1)
+E = (0,1)
+SE = (-1,1)
+SW = (-1,-1)
+NE = (1,1)
+NW = (1,-1)
+
+def moveQueen(n, queen, unique_obs, direction):
+    ''' Move the queen until an edge is hit or an obstacle '''
+    moves = 0
+    c_inc = direction[1]
+    r_inc = direction[0]
+
+    row = queen[0] + r_inc
+    col = queen[1] + c_inc
+    while col in range(1, n+1) and row in range(1, n+1) and (row, col) not in unique_obs:
+        moves += 1
+        col += c_inc
+        row += r_inc
+    return moves
+
+
+def queensAttack(n, k, queen, obstacles):
+    if n == 1:
+        return 0
+
+    unique_obs = set(obstacles)
+    operations = [N, S, E, W, SE, SW, NE, NW]
+    total = 0
+    for direction in operations:
+        total += moveQueen(n, queen, unique_obs, direction)
+
+    return
