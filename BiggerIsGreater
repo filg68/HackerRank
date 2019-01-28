@@ -1,0 +1,35 @@
+def biggerIsGreater(t):
+    """
+    Scans a string to determine if there is a letter swap that will create the next highest string in lexographical 
+    order and returns the new string
+    :param w: a string made up of lower case ascii letters
+    :return: a string made up of lower case ascii letters if swap exists or 'no answer' if no swap exists
+    """
+
+    # convert to array to simplify swaps
+    w = list(t)
+
+    # find peak
+
+    peak = None
+
+    for i in range(len(w)-1, 0, -1):
+        if w[i] > w[i-1]:
+            peak = i
+            break
+
+    if peak:
+
+        # swap p-1 with next highest value in the tail after peak
+        for i in range(len(w)-1, peak-1, -1):
+            if w[i] > w[peak - 1]:
+                w[i], w[peak - 1] = w[peak - 1], w[i]
+                break
+
+        s = w[peak:]
+        s.sort()
+        return ''.join(w[:peak]) + ''.join(s)
+
+    else:
+        # no peak means its either flat or in descending order already
+        return 'no answer'
