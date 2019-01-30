@@ -1,0 +1,17 @@
+def sherlockAndAnagrams(s):
+
+    anagrams = 0
+    length = len(s)
+    for size in range(1, length):
+        for i in range(0, length-1):
+            test = list(s[i:i+size])
+            test.sort()
+            j = i + 1
+            while j < length-(size-1):
+                search_string = list(s[j:j + size])
+                search_string.sort()
+                if test == search_string:
+                    anagrams += 1
+                j += 1
+
+    return anagrams
